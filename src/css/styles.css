@@ -1,0 +1,75 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #3A5254;
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    place-items: center;
+}
+
+#slider {
+    display: flex;
+    place-items: center;
+
+}
+
+.slider-image {
+    aspect-ratio: 16 / 9;
+    width: 1000px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.arrow {
+    color: red;
+    cursor: pointer;
+    opacity: 0.3;
+}
+
+.left {
+    translate: 50px;
+}
+
+.right {
+    translate: -50px;
+}
+
+.fade {
+    animation: linear fade 0.6s;
+}
+
+.appear {
+    animation: linear appear 0.5s;
+}
+
+@keyframes fade {
+
+    from {
+        opacity: 100%;
+
+    }
+
+    to {
+        opacity: 0%;
+    }
+    
+}
+
+@keyframes appear {
+    from {
+        opacity: 0%;
+
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
