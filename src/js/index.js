@@ -9,8 +9,9 @@ const images = [
 	"https://images.unsplash.com/photo-1601850494422-3cf14624b0b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGFuaW1lfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
 	"https://images.unsplash.com/photo-1493515322954-4fa727e97985?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGFuaW1lfGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
 ];
+
 let counter = 0;
-const animationDuration = 600;
+const animationDuration = 200;
 const slideDuration = 2000;
 
 init();
@@ -18,17 +19,22 @@ init();
 
 function handleArrowClick(e) {
 	const arrow = e.dataset.arrow;
+	let multiplier = 0;
+
+	if (arrow == "left") {
+		multiplier = -1;
+		slideLeft();
+	} else {
+		multiplier = 1;
+		slideRight();
+	}
+	imageElement.style.opacity = "0";
+	imageElement.style.rotate = `${5 * multiplier}deg`;
+
 	setTimeout(() => {
-		if (arrow == "left") {
-			slideLeft();
-		} else if (arrow == "right") {
-			slideRight();
-		}
-
-		imageElement.classList.remove("fade");
+		imageElement.style.opacity = "1";
+		imageElement.style.rotate = "0deg";
 	}, animationDuration);
-
-	imageElement.classList.add("fade");
 }
 
 function slideLeft() {
@@ -69,6 +75,10 @@ function autoSlide() {
 			imageElement.src = images[counter];
 		}
 		counter += 1;
+		setTimeout(() => {
+			imageElement.classList.remove("fade");
+		}, animationDuration);
+		imageElement.classList.add("fade");
 	}, slideDuration);
 }
 
