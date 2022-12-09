@@ -24,14 +24,13 @@ body {
 }
 
 .slider-image {
-    aspect-ratio: 16 / 8;
+    aspect-ratio: 16 / 7;
     opacity: 100;
     width: 90vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transition: 1000ms linear;
+    transition: 200ms ease-in-out;
     rotate: 0deg;
     scale: 1;
-    container-type: inline-size;
 }
 
 .arrow {

@@ -3,9 +3,11 @@ const SliderContainer = Slider.querySelector("#slider-image-container");
 const imageElement = SliderContainer.querySelector(".slider-image");
 
 const images = [
-	"https://c4.wallpaperflare.com/wallpaper/695/331/660/digital-art-artwork-women-cityscape-wallpaper-preview.jpg",
-	"https://c4.wallpaperflare.com/wallpaper/291/819/697/illustration-city-anime-painting-wallpaper-preview.jpg",
-	"https://c4.wallpaperflare.com/wallpaper/401/125/293/fantasy-art-couple-sun-sunset-wallpaper-preview.jpg",
+	"https://images4.alphacoders.com/128/1289066.jpg",
+	"https://wallpapercave.com/wp/wp9413235.jpg",
+	"https://wallpapercave.com/wp/wp10889463.jpg",
+	"https://images7.alphacoders.com/112/1126239.jpg",
+	"https://images2.alphacoders.com/114/1145884.jpg",
 ];
 
 let counter = 0;
@@ -28,7 +30,8 @@ function handleArrowClick(e) {
 	}
 	imageElement.style.opacity = "0";
 	imageElement.style.rotate = `${transitionRotation * multiplier}deg`;
-	imageElement.style.scale = 1.25;
+	imageElement.style.scale = 1.5;
+
 	setTimeout(() => {
 		imageElement.style.opacity = "1";
 		imageElement.style.rotate = "0deg";
@@ -40,13 +43,11 @@ function slideLeft() {
 	if (counter - 1 < 0) {
 		let index = images.length - 1;
 		let image = images[index];
-
 		imageElement.src = image;
 		counter = index;
 	} else {
 		let image = images[counter - 1];
 		imageElement.src = image;
-
 		counter -= 1;
 	}
 }
@@ -83,5 +84,4 @@ function autoSlide() {
 
 function init() {
 	imageElement.src = images[counter];
-	counter += 1;
 }
