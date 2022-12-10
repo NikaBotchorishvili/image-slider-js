@@ -1,7 +1,6 @@
 const Slider = document.getElementById("slider");
 const SliderContainer = Slider.querySelector("#slider-image-container");
 const imageElement = SliderContainer.querySelector(".slider-image");
-
 const images = [
 	"https://images4.alphacoders.com/128/1289066.jpg",
 	"https://wallpapercave.com/wp/wp9413235.jpg",
@@ -18,7 +17,8 @@ init();
 
 function handleArrowClick(e) {
 	const arrow = e.dataset.arrow;
-	const transitionRotation = 5;
+	const transitionRotation = 1;
+
 	let multiplier = 0;
 
 	if (arrow == "left") {
@@ -28,14 +28,16 @@ function handleArrowClick(e) {
 		multiplier = 1;
 		slideRight();
 	}
-	imageElement.style.opacity = "0";
+	imageElement.style.opacity = 0;
 	imageElement.style.rotate = `${transitionRotation * multiplier}deg`;
 	imageElement.style.scale = 1.5;
-
+	imageElement.style.filter = "blur(5px)"
 	setTimeout(() => {
-		imageElement.style.opacity = "1";
+		imageElement.style.opacity = 1;
 		imageElement.style.rotate = "0deg";
 		imageElement.style.scale = 1;
+		imageElement.style.filter = "blur(0px)"
+
 	}, animationDuration);
 }
 
@@ -65,23 +67,6 @@ function slideRight() {
 		counter += 1;
 	}
 }
-
-function autoSlide() {
-	setInterval(() => {
-		if (counter + 1 > images.length) {
-			counter = 0;
-			imageElement.src = images[counter];
-		} else {
-			imageElement.src = images[counter];
-		}
-		counter += 1;
-		setTimeout(() => {
-			imageElement.classList.remove("fade");
-		}, animationDuration);
-		imageElement.classList.add("fade");
-	}, slideDuration);
-}
-
 function init() {
 	imageElement.src = images[counter];
 }
