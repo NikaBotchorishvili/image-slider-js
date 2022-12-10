@@ -1,6 +1,5 @@
-const Slider = document.getElementById("slider");
-const SliderContainer = Slider.querySelector("#slider-image-container");
-const imageElement = SliderContainer.querySelector(".slider-image");
+let counter = 0;
+
 const images = [
 	"https://images4.alphacoders.com/128/1289066.jpg",
 	"https://wallpapercave.com/wp/wp9413235.jpg",
@@ -8,14 +7,20 @@ const images = [
 	"https://images7.alphacoders.com/112/1126239.jpg",
 	"https://images2.alphacoders.com/114/1145884.jpg",
 ];
+const imageElement = document.querySelector(".slider-image");
 
-let counter = 0;
+// 	Transition duration
 const animationDuration = 350;
+
+// 	Required for auto sliding
 const slideDuration = 10000;
+
+// 	Degrees of rotation during transitions
 const transitionRotation = 2;
 
 init();
 autoSlide();
+
 function handleArrowClick(e) {
 	const arrow = e.dataset.arrow;
 
@@ -83,10 +88,9 @@ function autoSlide() {
 			imageElement.src = images[counter];
 			imageElement.animate(
 				[
-					{ opacity: 1, rotate: "0deg", scale: 1, offset: 0 },
+					{ opacity: 1, scale: 1, offset: 0 },
 					{
 						opacity: 0,
-						rotate: `${transitionRotation}deg`,
 						scale: 1.5,
 						offset: 1,
 					},
@@ -96,10 +100,11 @@ function autoSlide() {
 					easing: "ease-in-out",
 				}
 			);
-			counter++
+			counter++;
 		}
 	}, slideDuration);
 }
+
 function init() {
 	imageElement.src = images[counter];
 }
