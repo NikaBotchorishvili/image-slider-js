@@ -10,14 +10,14 @@ const images = [
 ];
 
 let counter = 0;
-const animationDuration = 200;
-const slideDuration = 2000;
+const animationDuration = 350;
+const slideDuration = 10000;
+const transitionRotation = 2;
 
 init();
-
+autoSlide();
 function handleArrowClick(e) {
 	const arrow = e.dataset.arrow;
-	const transitionRotation = 1;
 
 	let multiplier = 0;
 
@@ -28,17 +28,22 @@ function handleArrowClick(e) {
 		multiplier = 1;
 		slideRight();
 	}
-	imageElement.style.opacity = 0;
-	imageElement.style.rotate = `${transitionRotation * multiplier}deg`;
-	imageElement.style.scale = 1.5;
-	imageElement.style.filter = "blur(5px)"
-	setTimeout(() => {
-		imageElement.style.opacity = 1;
-		imageElement.style.rotate = "0deg";
-		imageElement.style.scale = 1;
-		imageElement.style.filter = "blur(0px)"
 
-	}, animationDuration);
+	imageElement.animate(
+		[
+			{ opacity: 1, rotate: "0deg", scale: 1, filter: "blur(10px)", offset: 0 },
+			{
+				opacity: 0,
+				rotate: `${transitionRotation * multiplier}deg`,
+				scale: 1.5,
+				offset: 1,
+			},
+		],
+		{
+			duration: animationDuration,
+			easing: "ease-in-out",
+		}
+	);
 }
 
 function slideLeft() {
@@ -66,6 +71,34 @@ function slideRight() {
 
 		counter += 1;
 	}
+}
+
+function autoSlide() {
+	setInterval(() => {
+		if (counter + 1 > images.length) {
+			counter = 0;
+			imageElement.src = images[counter];
+		} else {
+			counter++;
+			imageElement.src = images[counter];
+			imageElement.animate(
+				[
+					{ opacity: 1, rotate: "0deg", scale: 1, offset: 0 },
+					{
+						opacity: 0,
+						rotate: `${transitionRotation}deg`,
+						scale: 1.5,
+						offset: 1,
+					},
+				],
+				{
+					duration: animationDuration,
+					easing: "ease-in-out",
+				}
+			);
+			counter++
+		}
+	}, slideDuration);
 }
 function init() {
 	imageElement.src = images[counter];
